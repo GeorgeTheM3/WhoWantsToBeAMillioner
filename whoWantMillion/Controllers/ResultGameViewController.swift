@@ -28,6 +28,7 @@ class ResultGameViewController: UIViewController {
         showUserAndPoints()
     }
     // как правильно реализовать рестарт игры
+    // чтобы не было миллион вью друг на друге?
     @objc private func restartGame() {
         let controller = GreetingViewController()
         controller.modalPresentationStyle = .fullScreen
