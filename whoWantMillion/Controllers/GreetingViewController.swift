@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class GreetingViewController: UIViewController {
-    private var presentView: GreetingView? {
+    private var greetingView: GreetingView? {
         if let view = self.view as? GreetingView {
             return view
         }
@@ -20,14 +20,22 @@ class GreetingViewController: UIViewController {
         super.loadView()
         self.view = GreetingView()
         self.view.backgroundColor = .white
+        DispatchQueue.global().async {
+            NetworkManager.shared.fetchData(url: "https://engine.lifeis.porn/api/millionaire.php?qType=1&count=5") { data in
+                LocaleStore.shared.resultData = data.data
+            }
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presentView?.startGameButton.addTarget(self, action: #selector(startGame), for: .touchUpInside)
+        greetingView?.startGameButton.addTarget(self, action: #selector(startGame), for: .touchUpInside)
     }
     
     @objc func startGame() {
+        if let user = greetingView?.textField.text {
+            LocaleStore.shared.curentUser = User(name: user)
+        }
         let controller = QuetionViewController()
         controller.modalPresentationStyle = .fullScreen
         present(controller, animated: true)

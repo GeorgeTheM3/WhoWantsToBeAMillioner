@@ -12,7 +12,6 @@ import SnapKit
 class QuestionsView: UIView {
     private(set) lazy var quationLabel: UILabel = {
         let label = UILabel()
-        label.text = "Quation"
         label.numberOfLines = 0
         label.textAlignment = .center
         return label
@@ -24,9 +23,14 @@ class QuestionsView: UIView {
         tableView.isScrollEnabled = false
         return tableView
     }()
-    private(set) lazy var userCurentPoints: UILabel = {
+    private(set) lazy var userCurentPointsLabel: UILabel = {
         let label = UILabel()
-        label.text = "Your points:"
+        label.text = "Ваши очки:"
+        return label
+    }()
+    private(set) lazy var userCurentPointsNumber: UILabel = {
+        let label = UILabel()
+        label.text = "0"
         return label
     }()
     
@@ -45,12 +49,17 @@ class QuestionsView: UIView {
     private func addViews() {
         addSubview(quationLabel)
         addSubview(tableViewAnswers)
-        addSubview(userCurentPoints)
+        addSubview(userCurentPointsLabel)
+        addSubview(userCurentPointsNumber)
     }
     
     private func setConstraintsViews() {
-        userCurentPoints.snp.makeConstraints { make in
+        userCurentPointsLabel.snp.makeConstraints { make in
             make.leading.equalTo(safeAreaLayoutGuide).offset(30)
+            make.top.equalTo(safeAreaLayoutGuide).offset(30)
+        }
+        userCurentPointsNumber.snp.makeConstraints { make in
+            make.leading.equalTo(userCurentPointsLabel.snp.trailing).offset(10)
             make.top.equalTo(safeAreaLayoutGuide).offset(30)
         }
         quationLabel.snp.makeConstraints { make in

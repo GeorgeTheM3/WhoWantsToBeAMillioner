@@ -7,4 +7,12 @@
 
 import Foundation
 
-struct MillionerData
+struct MillionerData: Decodable {
+    let data: [DataQuestions]
+}
+
+struct DataQuestions: Decodable {
+    let question: String
+    let answers: [String]
+    let id: Int
+}

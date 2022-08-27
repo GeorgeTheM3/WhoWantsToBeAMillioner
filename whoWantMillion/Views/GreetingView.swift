@@ -12,7 +12,11 @@ import SnapKit
 class GreetingView: UIView {
     private lazy var greetingLabel: UILabel = {
         let label = UILabel()
-        label.text = "Hello, man! This is game Who want a million? \n Do you want a play?"
+        label.text = """
+        Привет!
+        \n Это игра - Кто хочет стать миллионером?
+        \n Введите Ваше имя и нажимайте Старт!
+        """
         label.numberOfLines = 0
         label.textAlignment = .center
         return label
@@ -20,17 +24,22 @@ class GreetingView: UIView {
     
     private(set) lazy var startGameButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Start", for: .normal)
+        button.setTitle("Старт", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .cyan
+        button.backgroundColor = .orange
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 15
         return button
     }()
     
     private(set) lazy var textField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Enter your name"
+        textField.placeholder = "Введите имя"
         textField.layer.borderColor = CGColor(gray: 0, alpha: 1)
         textField.layer.borderWidth = 1
+        textField.clipsToBounds = true
+        textField.layer.cornerRadius = 5
+        textField.textAlignment = .center
         return textField
     }()
     
