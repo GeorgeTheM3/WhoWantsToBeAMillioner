@@ -27,12 +27,9 @@ class ResultGameViewController: UIViewController {
         resultGameView?.backgroundColor = .white
         showUserAndPoints()
     }
-    // как правильно реализовать рестарт игры
-    // чтобы не было миллион вью друг на друге?
+
     @objc private func restartGame() {
-        let controller = GreetingViewController()
-        controller.modalPresentationStyle = .fullScreen
-        present(controller, animated: true)
+        navigationController?.popToRootViewController(animated: true)
     }
     
     private func showUserAndPoints() {

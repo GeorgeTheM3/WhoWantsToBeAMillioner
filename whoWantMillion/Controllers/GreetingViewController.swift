@@ -20,6 +20,9 @@ class GreetingViewController: UIViewController {
         super.loadView()
         self.view = GreetingView()
         self.view.backgroundColor = .white
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         DispatchQueue.global().async {
             NetworkManager.shared.fetchData(url: "https://engine.lifeis.porn/api/millionaire.php?qType=1&count=5") { (data: MillionerData) in
                 LocaleStore.shared.resultData = data.data
@@ -38,6 +41,6 @@ class GreetingViewController: UIViewController {
         }
         let controller = QuetionViewController()
         controller.modalPresentationStyle = .fullScreen
-        present(controller, animated: true)
+        navigationController?.pushViewController(controller, animated: true)
     }
 }

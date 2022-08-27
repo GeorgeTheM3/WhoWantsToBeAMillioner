@@ -39,8 +39,7 @@ class QuetionViewController: UIViewController {
     }
     private func showResultGame() {
         let controller = ResultGameViewController()
-        controller.modalPresentationStyle = .fullScreen
-        present(controller, animated: true)
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     private func checkAnswer(id: Int) -> Int {
