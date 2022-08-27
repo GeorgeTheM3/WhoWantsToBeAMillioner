@@ -10,7 +10,7 @@ import Foundation
 class NetworkManager {
     static let shared = NetworkManager()
     
-    func fetchData(url: String, completion: @escaping (MillionerData) -> Void) {
+    func fetchData<T: Decodable>(url: String, completion: @escaping (T) -> Void) {
         guard let request = URL(string: url) else { return }
         URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
@@ -18,8 +18,8 @@ class NetworkManager {
             }
             guard let data = data else { return }
             do {
-                let millionerData = try JSONDecoder().decode(MillionerData.self, from: data)
-                completion(millionerData)
+                let json = try JSONDecoder().decode(T.self, from: data)
+                completion(json)
             } catch {
                 print(error.localizedDescription)
             }

@@ -21,7 +21,7 @@ class GreetingViewController: UIViewController {
         self.view = GreetingView()
         self.view.backgroundColor = .white
         DispatchQueue.global().async {
-            NetworkManager.shared.fetchData(url: "https://engine.lifeis.porn/api/millionaire.php?qType=1&count=5") { data in
+            NetworkManager.shared.fetchData(url: "https://engine.lifeis.porn/api/millionaire.php?qType=1&count=5") { (data: MillionerData) in
                 LocaleStore.shared.resultData = data.data
             }
         }
