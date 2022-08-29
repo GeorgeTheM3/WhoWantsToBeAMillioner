@@ -25,7 +25,7 @@ class GreetingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         DispatchQueue.global().async {
             NetworkManager.shared.fetchData(url: "https://engine.lifeis.porn/api/millionaire.php?qType=1&count=5") { (data: MillionerData) in
-                LocaleStore.shared.resultData = data.data
+                LocaleStore.shared.resultData = data.data 
             }
         }
     }
@@ -36,7 +36,7 @@ class GreetingViewController: UIViewController {
     }
     
     @objc func startGame() {
-        if let user = greetingView?.textField.text {
+        if let user = greetingView?.enterYourNameTextFiled.text {
             LocaleStore.shared.curentUser = User(name: user)
         }
         let controller = QuetionViewController()

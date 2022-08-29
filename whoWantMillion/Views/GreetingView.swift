@@ -32,7 +32,7 @@ class GreetingView: UIView {
         return button
     }()
     
-    private(set) lazy var textField: UITextField = {
+    private(set) lazy var enterYourNameTextFiled: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Введите имя"
         textField.layer.borderColor = CGColor(gray: 0, alpha: 1)
@@ -58,16 +58,16 @@ class GreetingView: UIView {
     private func addViews() {
         addSubview(greetingLabel)
         addSubview(startGameButton)
-        addSubview(textField)
+        addSubview(enterYourNameTextFiled)
     }
     
     private func setConstraintsViews() {
         greetingLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(textField.snp.top).offset(-20)
+            make.bottom.equalTo(enterYourNameTextFiled.snp.top).offset(-20)
             make.width.equalTo(safeAreaLayoutGuide)
             make.centerX.equalTo(safeAreaLayoutGuide.snp.centerX)
         }
-        textField.snp.makeConstraints { make in
+        enterYourNameTextFiled.snp.makeConstraints { make in
             make.bottom.equalTo(startGameButton.snp.top).offset(-20)
             make.width.equalTo(250)
             make.height.equalTo(50)

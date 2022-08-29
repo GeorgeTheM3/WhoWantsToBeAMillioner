@@ -30,9 +30,12 @@ class QuetionViewController: UIViewController {
     }
     
     private func setQuestionAndCurrentPoints() {
-        LocaleStore.shared.curentQuestion = LocaleStore.shared.resultData.randomElement()
-        LocaleStore.shared.resultData.removeAll(where: {$0.question == LocaleStore.shared.curentQuestion?.question})
-        questionsView?.quationLabel.text = LocaleStore.shared.curentQuestion?.question
+        LocaleStore.shared.currentQuestion = LocaleStore.shared.resultData.randomElement()
+        LocaleStore.shared.resultData.removeAll(where: {$0.question == LocaleStore.shared.currentQuestion?.question})
+        if let answer = LocaleStore.shared.currentQuestion?.answers[0] {
+            LocaleStore.shared.currentAnswer = answer
+        }
+        questionsView?.quationLabel.text = LocaleStore.shared.currentQuestion?.question
         if let points = LocaleStore.shared.curentUser?.points {
             questionsView?.userCurentPointsNumber.text = String(points)
         }
@@ -42,15 +45,17 @@ class QuetionViewController: UIViewController {
         navigationController?.pushViewController(controller, animated: true)
     }
     
-    private func checkAnswer(id: Int) -> Int {
-        id == LocaleStore.shared.curentQuestion?.id ? 100 : 0
+    private func checkAnswer(answer: String) -> Int {
+        LocaleStore.shared.currentAnswer == answer ? 100 : 0
     }
 }
 
 extension QuetionViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "cell") {
-            cell.textLabel?.text = LocaleStore.shared.curentQuestion?.answers[indexPath.row]
+            let answer = LocaleStore.shared.currentQuestion?.answers.randomElement()
+            LocaleStore.shared.currentQuestion?.answers.removeAll(where: {$0 == answer})
+            cell.textLabel?.text = answer
             cell.textLabel?.textAlignment = .center
             return cell
         }
@@ -58,7 +63,7 @@ extension QuetionViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let number = LocaleStore.shared.curentQuestion?.answers.count {
+        if let number = LocaleStore.shared.currentQuestion?.answers.count {
             return number
         }
         return 0
@@ -67,8 +72,10 @@ extension QuetionViewController: UITableViewDataSource {
 
 extension QuetionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        LocaleStore.shared.curentUser?.points += checkAnswer(id: indexPath.row)
-        guard !LocaleStore.shared.resultData.isEmpty else { return showResultGame()}
+        if let answer = tableView.cellForRow(at: indexPath)?.textLabel?.text {
+            LocaleStore.shared.curentUser?.points += checkAnswer(answer: answer)
+        }
+        if LocaleStore.shared.resultData.isEmpty { return showResultGame()}
         setQuestionAndCurrentPoints()
         questionsView?.tableViewAnswers.reloadData()
     }

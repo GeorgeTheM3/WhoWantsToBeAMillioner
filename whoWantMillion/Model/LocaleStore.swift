@@ -11,8 +11,9 @@ class LocaleStore {
     static let shared = LocaleStore()
     
     var resultData: [DataQuestions] = []
-
-    var curentQuestion: DataQuestions? = nil
+    
+    var currentQuestion: DataQuestions? = nil
+    var currentAnswer: String = ""
     
     var curentUser: User? = nil
 }

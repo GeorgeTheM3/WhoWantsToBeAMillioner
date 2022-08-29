@@ -13,6 +13,6 @@ struct MillionerData: Decodable {
 
 struct DataQuestions: Decodable {
     let question: String
-    let answers: [String]
+    var answers: [String]
     let id: Int
 }
