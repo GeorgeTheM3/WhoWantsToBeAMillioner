@@ -34,7 +34,7 @@ class ResultGameViewController: UIViewController {
     
     private func showUserAndPoints() {
         if let user = LocaleStore.shared.curentUser?.name, let points = LocaleStore.shared.curentUser?.points {
-            resultGameView?.congratulationsLabel.text = "Поздравляем, \(user)!"
+            resultGameView?.congratulationsLabel.text = "Поздравляем \(user)!"
             resultGameView?.resultPoints.text = "Вы набрали \(points) очков"
         }
     }

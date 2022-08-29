@@ -63,20 +63,22 @@ class GreetingView: UIView {
     
     private func setConstraintsViews() {
         greetingLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(enterYourNameTextFiled.snp.top).offset(-20)
-            make.width.equalTo(safeAreaLayoutGuide)
+            make.width.equalTo(safeAreaLayoutGuide).inset(5)
             make.centerX.equalTo(safeAreaLayoutGuide.snp.centerX)
+            make.centerY.equalTo(safeAreaLayoutGuide.snp.centerY).offset(-100)
+            make.height.equalTo(200)
         }
         enterYourNameTextFiled.snp.makeConstraints { make in
-            make.bottom.equalTo(startGameButton.snp.top).offset(-20)
+            make.top.equalTo(greetingLabel.snp.bottom).offset(-20)
             make.width.equalTo(250)
             make.height.equalTo(50)
-            make.centerX.equalTo(startGameButton.snp.centerX)
+            make.centerX.equalTo(greetingLabel.snp.centerX)
         }
         startGameButton.snp.makeConstraints { make in
-            make.centerX.equalTo(safeAreaLayoutGuide.snp.centerX)
-            make.centerY.equalTo(safeAreaLayoutGuide.snp.centerY)
+            make.top.equalTo(enterYourNameTextFiled.snp.bottom).offset(20)
+            make.centerX.equalTo(greetingLabel.snp.centerX)
             make.width.equalTo(100)
+            make.height.equalTo(40)
         }
     }
 }

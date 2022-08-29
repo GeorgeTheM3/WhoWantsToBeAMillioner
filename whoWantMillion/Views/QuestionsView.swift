@@ -56,16 +56,21 @@ class QuestionsView: UIView {
     private func setConstraintsViews() {
         userCurentPointsLabel.snp.makeConstraints { make in
             make.leading.equalTo(safeAreaLayoutGuide).offset(30)
-            make.top.equalTo(safeAreaLayoutGuide).offset(30)
+            make.top.equalTo(safeAreaLayoutGuide).offset(0)
+            make.height.equalTo(20)
+            make.width.equalTo(90)
         }
         userCurentPointsNumber.snp.makeConstraints { make in
             make.leading.equalTo(userCurentPointsLabel.snp.trailing).offset(10)
-            make.top.equalTo(safeAreaLayoutGuide).offset(30)
+            make.top.equalTo(safeAreaLayoutGuide).offset(0)
+            make.width.equalTo(100)
+            make.height.equalTo(userCurentPointsLabel.snp.height)
         }
         quationLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(safeAreaLayoutGuide.snp.centerY).offset(-100)
+            make.centerY.equalTo(safeAreaLayoutGuide.snp.centerY).offset(-150)
             make.width.equalTo(safeAreaLayoutGuide).offset(-50)
             make.centerX.equalTo(safeAreaLayoutGuide.snp.centerX)
+            make.height.equalTo(200)
         }
         tableViewAnswers.snp.makeConstraints { make in
             make.width.equalTo(safeAreaLayoutGuide).offset(-100)
